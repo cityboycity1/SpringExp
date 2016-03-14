@@ -1,4 +1,4 @@
-package com.endava.siv5l.Spring;
+package com.endava.siv5l.Spring.netExample;
 
 public class Square {
 

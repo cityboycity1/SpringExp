@@ -1,4 +1,4 @@
-package com.endava.siv5l.Spring;
+package com.endava.siv5l.Spring.netExample;
 
 /**
  * Created by vlica on 3/14/2016.

@@ -1,4 +1,6 @@
-package com.endava.siv5l.Spring;
+package com.endava.siv5l.Spring.netExample;
+
+import com.endava.siv5l.Spring.netExample.Point;
 
 /**
  * Created by vlica on 3/14/2016.

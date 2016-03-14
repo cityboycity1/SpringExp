@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <bean id="square" class="com.endava.siv5l.Spring.Square" >
+    <bean id="square" class="com.endava.siv5l.Spring.netExample.Square" >
         <!--<property name="type" value="Equilateral" /> contain cunoaste ce instantiem -->
         <!-- <constructor-arg value="Isoscel" /> contain cunoaste ca el string-->
         <!-- <constructor-arg type="int" value="20" />  containerul cunoaste ce tip e arg-->
@@ -11,25 +11,49 @@
         <constructor-arg index="1" value="20" />
     </bean>
 
-    <bean id="triangle" class = "com.endava.siv5l.Spring.Triangle" >
+    <bean id="triangle" class = "com.endava.siv5l.Spring.netExample.Triangle" >
         <property name="pointA" ref="zeroPoint" />
         <property name="pointB" ref="point2" />
         <property name="pointC" ref="point3" />
     </bean>
 
-    <bean id="zeroPoint" class="com.endava.siv5l.Spring.Point" >
+    <bean id="zeroPoint" class="com.endava.siv5l.Spring.netExample.Point" >
         <property name="x" value="0" />
         <property name="y" value="0" />
     </bean>
 
-    <bean id="point2" class="com.endava.siv5l.Spring.Point" >
+    <bean id="point2" class="com.endava.siv5l.Spring.netExample.Point" >
         <property name="x" value="-20" />
         <property name="y" value="0" />
     </bean>
 
-    <bean id="point3" class="com.endava.siv5l.Spring.Point" >
+    <bean id="point3" class="com.endava.siv5l.Spring.netExample.Point" >
         <property name="x" value="0" />
         <property name="y" value="20" />
     </bean>
+
+    <bean id="knight" class="com.endava.siv5l.Spring.inAction.BraveKnight" >
+        <constructor-arg ref="quest" />
+        <constructor-arg ref="minstrel" />
+    </bean>
+
+    <bean id="quest" class="com.endava.siv5l.Spring.inAction.SlayDragonQuest" >
+        <constructor-arg value="@{T(System).out}" />
+    </bean>
+
+    <bean id="minstrel" class="com.endava.siv5l.Spring.inAction.Minstrel" >
+        <constructor-arg value = "#{T(System).out" />
+    </bean>
+
+    <aop:config>
+        <aop:aspect ref="minstrel" >
+            <aop:pointcut id="embark"
+                          expression="execution(* *.embarkOnQuest(..))"/>
+            <aop:before pointcut-ref="embark"
+                        method="singBeforeQuest" />
+            <aop:after pointcut-ref="embark"
+                        method="singAfterQuest" />
+        </aop:aspect>
+    </aop:config>
 
 </beans>
